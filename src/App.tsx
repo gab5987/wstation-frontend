@@ -1,40 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.scss';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import Sidebar from './components/Sidebar';
+import Homepage from './components/pages/Home';
+class App extends React.Component<{}, {actualPage: string} > {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      actualPage: window.location.pathname
+    }
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <ProSidebar className='App-sidebar'>
-        <Menu iconShape="square">
-          <MenuItem >Dashboard</MenuItem>
-          <SubMenu title="Components" >
-            <MenuItem>Component 1</MenuItem>
-            <MenuItem>Component 2</MenuItem>
-          </SubMenu>
-        </Menu>
-      </ProSidebar>
-
-      <div className="App-header">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+  render() {
+    return (
+      <div className="App">
+        <Sidebar page={this.state.actualPage}/>
+        <div className="App-header">
+          { this.state.actualPage === '/home' && <Homepage/>}
+          { this.state.actualPage === '/about' ? <About/> : <Unreachable/>}
+        </div>
+        <BrowserRouter>
+          <Routes/>  
+        </BrowserRouter>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
+const About = () => {
+  return <h1>Lorem ipsum</h1>
+}
+
+const Unreachable = () => {
+  return <h1>404 - not found !</h1>
+}
 export default App;
