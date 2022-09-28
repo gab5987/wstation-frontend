@@ -1,0 +1,23 @@
+{
+    "exeptions":{
+        "notFound": "Error 404 - This page does not exist"
+    },
+    "messages":{
+        "success": "Success",
+        "error": "Error",
+        "warning": "Warning",
+        "info": "Info"
+    },
+    "sidebarItens": {
+        "home": {
+            "title": "Dashboard",
+            "icon": "home",
+            "link": "/home"
+        },
+        "about": {
+            "title": "About",
+            "icon": "info",
+            "link": "/about"
+        }
+    }
+}
