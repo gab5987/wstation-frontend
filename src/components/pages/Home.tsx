@@ -1,6 +1,6 @@
 import logo from '../../logo.svg';
 
-const Homepage = () => {
+const Homepage = (props: any) => {
     return (
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
