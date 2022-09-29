@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.scss';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -11,22 +11,24 @@ const ptBR = require("./data/res_primary_language.json");
 const enUS = require("./data/res_secondary_language.json");
 const data = require("./data/shared_data.json");
 
-class App extends Component {
+class App extends React.Component<{}, { user: string | undefined, pass: string | undefined, isLogged: Boolean, language: any }> {
   constructor(props: any){
     super(props);
     this.state = {
       user: undefined,
-      language: "ptBR",
+      pass: undefined,
       isLogged: false,
+      language: ptBR,
     }
   }
   render(): React.ReactNode {
+    {this.state.isLogged ? console.log("Logged") : console.log("Not logged")}
       return (
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Main />} />
             <Route path="/about" element={<Main />} />
-            <Route path="/user/login" element={<UserLogin/>} />
+            <Route path="/user/login" element={<UserLogin state={this.state}/>} />
             <Route path="*" element={<Unreachable/>}/>
           </Routes>
         </BrowserRouter>
@@ -50,8 +52,8 @@ class Main extends React.Component<{}, {actualPage: string, language: object, us
         <Sidebar page={this.state.actualPage} resumeLanguage={this.state.language}/>
         <div className="App-header">
           { 
-            {
-              "/home": <Homepage resumeLanguage={this.state.language} />,
+            {  //resumeLanguage={this.state.language}
+              "/home": <Homepage  />,
               "/about": <About/>,
               "default": <Unreachable/>
             }[this.state.actualPage]
