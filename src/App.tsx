@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Sidebar from './components/Sidebar';
 import Homepage from './components/pages/Home';
 import UserLogin from './components/pages/UserLogin';
+import 'font-awesome/css/font-awesome.min.css';
 
 const ptBR = require("./data/res_primary_language.json");
 const enUS = require("./data/res_secondary_language.json");
@@ -24,7 +25,9 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/home" element={<Main />} />
+            <Route path="/about" element={<Main />} />
             <Route path="/user/login" element={<UserLogin/>} />
+            <Route path="*" element={<Unreachable/>}/>
           </Routes>
         </BrowserRouter>
       )
@@ -44,10 +47,15 @@ class Main extends React.Component<{}, {actualPage: string, language: object, us
   render() {
     return (
       <div className="App">
-        <Sidebar page={this.state.actualPage}/>
+        <Sidebar page={this.state.actualPage} resumeLanguage={this.state.language}/>
         <div className="App-header">
-          { this.state.actualPage === '/home' && <Homepage resumeLanguage={this.state.language}/>}
-          { this.state.actualPage === '/about' ? <About/> : <Unreachable/>}
+          { 
+            {
+              "/home": <Homepage resumeLanguage={this.state.language} />,
+              "/about": <About/>,
+              "default": <Unreachable/>
+            }[this.state.actualPage]
+          }
         </div>
       </div>
     );
@@ -60,7 +68,8 @@ const About = () => {
 
 const Unreachable = () => {
   return(
-    <div>
+    <div className='App-header' style={{width: '100vw'}}>
+
       <h1>404 - not found !</h1>
       <a href="/home" style={{textDecoration: "none"}}> go back home </a>
     </div>
