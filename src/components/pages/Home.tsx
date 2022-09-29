@@ -57,7 +57,7 @@ class Homepage extends PureComponent {
 
   render() {
     return (
-      <ResponsiveContainer width="90%" height="90%">
+        <ResponsiveContainer width="80%" height="80%">
         <LineChart
           width={500}
           height={300}
@@ -71,11 +71,12 @@ class Homepage extends PureComponent {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name"/>
-          <YAxis />
-          <Tooltip />
+          <YAxis  yAxisId="left" type="number" domain={[0, 100]}/>
+          <YAxis  yAxisId="right" orientation="right" type="number" domain={[0, 45]}/>
           <Legend />
-          <Line type="monotone" dataKey="umidade" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="temperatura" stroke="#82ca9d" />
+          <Tooltip />
+          <Line yAxisId="left" type="monotone" dataKey="umidade" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line yAxisId="right" type="monotone" dataKey="temperatura" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     );
