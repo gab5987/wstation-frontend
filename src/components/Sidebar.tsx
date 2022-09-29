@@ -5,7 +5,6 @@ import {
     faGaugeHigh,
     faQuestion,
     faUser,
-    faUserCog,
     faNewspaper,
     faTemperatureQuarter,
     faDroplet,
@@ -26,7 +25,33 @@ const Sidebar = (props: any) => {
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    
+                    <MenuItem icon={<FontAwesomeIcon icon={faGaugeHigh} />}>
+                        <a href="/home"> Dashboard </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faNewspaper} />}>
+                        <a href="/about"> Logs </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
+                        <a href="/about"> Graphs </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faTemperatureQuarter} />}>
+                        <a href="/about"> Temperature </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faDroplet} />}>
+                        <a href="/about"> Humidity </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faGears} />}>
+                        <a href="/about"> Settings </a>
+                    </MenuItem>
+
+                    <MenuItem icon={<FontAwesomeIcon icon={faQuestion} />}>
+                        <a href="/about"> About </a>
+                    </MenuItem>
                 </Menu>
             </SidebarContent>
 
@@ -42,31 +67,3 @@ const Sidebar = (props: any) => {
     );
 }
 export default Sidebar;
-
-// <MenuItem icon={<FontAwesomeIcon icon={faGaugeHigh} />}>
-//                         <a href="/home"> Dashboard </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faNewspaper} />}>
-//                         <a href="/about"> Logs </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
-//                         <a href="/about"> Graphs </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faTemperatureQuarter} />}>
-//                         <a href="/about"> Temperature </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faDroplet} />}>
-//                         <a href="/about"> Humidity </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faGears} />}>
-//                         <a href="/about"> Settings </a>
-//                     </MenuItem>
-
-//                     <MenuItem icon={<FontAwesomeIcon icon={faQuestion} />}>
-//                         <a href="/about"> About </a>
-//                     </MenuItem>
