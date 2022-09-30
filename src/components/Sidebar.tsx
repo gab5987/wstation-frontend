@@ -30,7 +30,7 @@ const Sidebar = (props: any) => {
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faNewspaper} />}>
-                        <a href="/about"> Logs </a>
+                        <a href="/logs"> Logs </a>
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
