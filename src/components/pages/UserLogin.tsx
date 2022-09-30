@@ -1,6 +1,5 @@
-import "./UserLogin.scss";
+import "./assets/UserLogin.scss";
 import { useState } from 'react';
-import { connectToDB } from "../../dbHandler";
 
 const UserLogin = (props: any) => {
     const [email, setEmail] = useState("");
@@ -9,7 +8,7 @@ const UserLogin = (props: any) => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         alert(`The name you entered was: ${email} and ${pass}`);
-        console.log(connectToDB.getAllValues)
+        props.handleLogin(email, pass).bind(this);
     };
 
     const renderForm = (
@@ -34,7 +33,6 @@ const UserLogin = (props: any) => {
         <div className="app">
           <div className="login-form">
             <h1 className="title" style={{color: 'rgb(202, 202, 202)'}}>Sign In</h1>
-            {/* {isSubmitted ? <div>User is successfully logged in</div> : renderForm} */}
             {renderForm}
           </div>
         </div>

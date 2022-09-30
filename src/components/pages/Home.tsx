@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import axios from "axios";
-import "./Home.scss";
+import "./assets/Home.scss";
 const apiBaseUrl = "http://192.168.0.13:8080";
 
 class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData: any, }> {
@@ -41,8 +41,9 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
   render() { !this.state.gotData && this.getChartData();
     return (
       <div className="main-screen">
-        
-        <ResponsiveContainer width="80%" height="80%">
+
+        <h3> Temperature and humidity chart </h3>
+        <ResponsiveContainer className="main-chart" width="80%" height="80%">
         <LineChart
           width={500}
           height={300}
