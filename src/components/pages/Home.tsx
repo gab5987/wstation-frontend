@@ -1,67 +1,54 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import axios from "axios";
+import "./Home.scss";
+const apiBaseUrl = "http://192.168.0.13:8080";
 
-const data = [
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-  {
-    name: (10 * Math.random()).toFixed(2),
-    temperatura: (30 * Math.random()).toFixed(2),
-    umidade: (100 * Math.random()).toFixed(2),
-  },
-];
-
-class Homepage extends PureComponent {
+class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData: any }> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      data: [],
+      rawData: undefined,
+      gotData: false,
+    }
+    this.getChartData = this.getChartData.bind(this);
+    this.pushData = this.pushData.bind(this);
   }
-  static demoUrl = 'https://codesandbox.io/s/simple-line-chart-kec3v';
 
-  render() {
+  async getChartData() {
+    await axios.get(apiBaseUrl + "/measurements")
+    .then((res) => {
+      this.setState({
+        gotData: true,
+        rawData: res
+      }, () => { 
+        console.log(this.state.rawData)
+        this.pushData();
+      })
+    })
+  }
+
+  pushData() {
+    for(let i: number = 0 ; i < 5 ; i++) {
+      this.state.data.push({
+        name: this.state.rawData.data[i].split("$")[0],
+        umidade: Number(this.state.rawData.data[i].split("$")[3]).toFixed(1),
+        temperatura: Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)
+      })
+    }
+  }
+
+
+  render() { !this.state.gotData && this.getChartData();
     return (
+      <div className="main-screen">
+        
         <ResponsiveContainer width="80%" height="80%">
         <LineChart
           width={500}
           height={300}
-          data={data}
+          data={this.state.data}
           margin={{
             top: 5,
             right: 30,
@@ -79,6 +66,7 @@ class Homepage extends PureComponent {
           <Line yAxisId="right" type="monotone" dataKey="temperatura" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
+     </div>
     );
   }
 }
