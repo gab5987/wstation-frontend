@@ -1,8 +1,10 @@
-
+import "./assets/Pages.scss";
 const Logs = () => {
   return (
-    <div>
-      <h1>Logs</h1>
+    <div className="app">
+        <div className="app-title">
+            <h3>Logs</h3>
+        </div>
     </div>
   );
 }

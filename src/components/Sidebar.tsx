@@ -13,8 +13,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = (props: any) => {
-    var page = props.page;
-    var sidebarItens = props.resumeLanguage.sidebarItens;
     return(
         <ProSidebar className='App-sidebar'>
             <SidebarHeader>

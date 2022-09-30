@@ -1,0 +1,14 @@
+.app {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+  }
+
+.app-title {
+    font-size: 2rem;
+    padding-left: 2.5%;
+    align-self: left !important;
+}
