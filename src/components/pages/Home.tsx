@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Home.scss";
 const apiBaseUrl = "http://192.168.0.13:8080";
 
-class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData: any }> {
+class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData: any, }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -23,14 +23,13 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
         gotData: true,
         rawData: res
       }, () => { 
-        console.log(this.state.rawData)
-        this.pushData();
+        this.state.data[0] === undefined && this.pushData();
       })
     })
   }
 
   pushData() {
-    for(let i: number = 0 ; i < 5 ; i++) {
+    for(let i: number = 10 ; i >= 0 ; i--) {
       this.state.data.push({
         name: this.state.rawData.data[i].split("$")[0],
         umidade: Number(this.state.rawData.data[i].split("$")[3]).toFixed(1),
@@ -38,7 +37,6 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
       })
     }
   }
-
 
   render() { !this.state.gotData && this.getChartData();
     return (
