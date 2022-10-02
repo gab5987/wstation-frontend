@@ -6,7 +6,7 @@ import "./assets/Pages.scss";
 
 const apiBaseUrl = "http://192.168.0.13:8080";
 
-class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData: any, }> {
+class Homepage extends PureComponent<{resumeLanguage: any}, { data: any, gotData: boolean, rawData: any, }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -34,8 +34,10 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
     for(let i: number = 10 ; i >= 0 ; i--) {
       this.state.data.push({
         name: this.state.rawData.data[i].split("$")[0],
-        umidade: Number(this.state.rawData.data[i].split("$")[3]).toFixed(1),
-        temperatura: Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)
+        Umidade: Number(this.state.rawData.data[i].split("$")[3]).toFixed(1),
+        Temperatura: Number(this.state.rawData.data[i].split("$")[1]).toFixed(1),
+        Humidity: Number(this.state.rawData.data[i].split("$")[3]).toFixed(1),
+        Temperature: Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)
       })
     }
   }
@@ -44,10 +46,10 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
     return (
       <div className="main-screen">
         <div className="app-title">
-          <h3> Temperature and humidity chart </h3>
+          <h3> { this.props.resumeLanguage.title } </h3>
         </div>
 
-        <h3 style={{ textAlign: "center" }}> Temperature and humidity chart </h3>
+        <h3 style={{ textAlign: "center" }}> { this.props.resumeLanguage.chartTitle } </h3>
         <ResponsiveContainer className="main-chart" width="80%" height="80%">
         <LineChart
           width={500}
@@ -66,8 +68,8 @@ class Homepage extends PureComponent<{}, { data: any, gotData: boolean, rawData:
           <YAxis  yAxisId="right" orientation="right" type="number" domain={[0, 45]}/>
           <Legend />
           <Tooltip />
-          <Line yAxisId="left" type="monotone" dataKey="umidade" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line yAxisId="right" type="monotone" dataKey="temperatura" stroke="#82ca9d" />
+          <Line yAxisId="left" type="monotone" dataKey={ this.props.resumeLanguage.chartSub.humidity } stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line yAxisId="right" type="monotone" dataKey={ this.props.resumeLanguage.chartSub.temperature } stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
      </div>

@@ -8,16 +8,15 @@
         "warning": "Warning",
         "info": "Info"
     },
-    "sidebarItens": {
+    "pages": {
         "home": {
-            "title": "Dashboard",
-            "icon": "home",
-            "link": "/home"
-        },
-        "about": {
-            "title": "About",
-            "icon": "info",
-            "link": "/about"
+            "title": "Home",
+            "description": "Home page",
+            "chartTitle": "Temperature and humidity chart",
+            "chartSub":{
+                "temperature": "Temperature",
+                "humidity": "Humidity"
+            }
         }
     }
 }

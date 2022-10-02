@@ -8,16 +8,15 @@
         "warning": "Warning",
         "info": "Info"
     },
-    "sidebarItens": {
+    "pages": {
         "home": {
-            "title": "Dashboard",
-            "icon": "home",
-            "link": "/home"
-        },
-        "about": {
-            "title": "Sobre",
-            "icon": "info",
-            "link": "/about"
+            "title": "Página Inicial",
+            "description": "",
+            "chartTitle": "Gráfico de Umidade e Temperatura",
+            "chartSub":{
+                "temperature": "Temperatura",
+                "humidity": "Umidade"
+            }
         }
     }
 }
