@@ -4,7 +4,7 @@ import axios from "axios";
 import "./assets/Home.scss";
 import "./assets/Pages.scss";
 
-const apiBaseUrl = "http://192.168.0.13:8080";
+const apiBaseUrl = "http://147.182.208.9:8080";
 
 class Homepage extends PureComponent<{resumeLanguage: any}, { data: any, gotData: boolean, rawData: any, }> {
   constructor(props: any) {
