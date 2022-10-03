@@ -17,6 +17,16 @@
                 "temperature": "Temperature",
                 "humidity": "Humidity"
             }
+        },
+        "logs": {
+            "title": "Logs",
+            "description": "Logs page",
+            "dataItens": {
+                "humidity": "humidity",
+                "temp": "Temperature",
+                "heatIndex": "Heat Index",
+                "date": "Date"
+            }
         }
     }
 }

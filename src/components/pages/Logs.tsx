@@ -4,7 +4,11 @@ import ReactTableUI from 'react-table-ui'
 import axios from "axios";
 
 const apiBaseUrl = "http://147.182.208.9:8080";
-class Logs extends React.Component<{resumeLanguage: any}, { data: any, gotData: boolean, rawData: any, isPushed: boolean, }>  {
+
+
+class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any}, 
+	{ data: any, gotData: boolean, rawData: any, isPushed: boolean, }>  {
+
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -43,37 +47,36 @@ class Logs extends React.Component<{resumeLanguage: any}, { data: any, gotData: 
 
 	render() { !this.state.gotData && this.getChartData();
 			if(this.state.isPushed === false){
-				return <h1>wait</h1>
+				return <h1> { this.props.resumeMessages.loading } </h1>
 			} else {
 				return (
 					<div className="app">
 							<div className="app-title">
-									<h3>Logs</h3>
+								<h3>{ this.props.resumeLanguage.title }</h3>
 							</div>
 							<ReactTableUI
-									title='My Table'
-									data={ this.state.data }
-									actionOptions={{
-											
-									}}
-									styleOptions={{
-											titleBar: false,
-											theme: {
-													colors: {
-															background: {
-																	primary: "#282c34",
-																	secondary: "#343a45",
-															},
-															text: {
-																	primary: "#b5b3b3",
-																	secondary: "#b5b3b3",
-															},
-															border: {
-																	primary: "#a3a3a3",
-															}
-													}
+								title='My Table'
+								data={ this.state.data }
+								actionOptions={{
+								}}
+								styleOptions={{
+									titleBar: false,
+									theme: {
+										colors: {
+											background: {
+												primary: "#282c34",
+												secondary: "#343a45",
 											},
-									}}
+											text: {
+												primary: "#b5b3b3",
+												secondary: "#b5b3b3",
+											},
+											border: {
+												primary: "#a3a3a3",
+											}
+										}
+									},
+								}}
 							/>
 					</div>
 				);

@@ -6,7 +6,8 @@
         "success": "Success",
         "error": "Error",
         "warning": "Warning",
-        "info": "Info"
+        "info": "Info",
+        "loading": "Por favor aguarde..."
     },
     "pages": {
         "home": {
@@ -16,6 +17,16 @@
             "chartSub":{
                 "temperature": "Temperatura",
                 "humidity": "Umidade"
+            }
+        },
+        "logs": {
+            "title": "Logs",
+            "description": "Página de Logs",
+            "dataItens": {
+                "humidity": "Umidade",
+                "temp": "Temperatura",
+                "heatIndex": "Sensação Térmica",
+                "date": "Data"
             }
         }
     }
