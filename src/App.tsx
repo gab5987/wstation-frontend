@@ -46,7 +46,10 @@ class Main extends React.Component<{resume: any}, {actualPage: string, language:
         <div className="App-header">
           { 
             {
-              "/home": <Homepage resumeLanguage={ this.state.language.pages.home } />,
+              "/home": <Homepage 
+                resumeLanguage={ this.state.language.pages.home } 
+                resumeMessages={ this.state.language.messages }
+              />,
               "/about": <About/>,
               "/logs": <Logs 
                 resumeLanguage={ this.state.language.pages.home }
