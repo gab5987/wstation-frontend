@@ -20,8 +20,8 @@
             }
         },
         "logs": {
-            "title": "Logs",
-            "description": "Página de Logs",
+            "title": "Página de Logs",
+            "description": "Nestá página é possível encontrar o log de todas as medições registradas pelo sistema.",
             "dataItens": {
                 "humidity": "Umidade",
                 "temp": "Temperatura",
