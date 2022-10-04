@@ -19,7 +19,9 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 			}
 			this.getChartData = this.getChartData.bind(this);
 			this.pushData = this.pushData.bind(this);
-		}
+			this.getRightTime = this.getRightTime.bind(this);
+	}
+
 	async getChartData() {
 		await axios.get(apiBaseUrl + "/measurements")
 		.then((res) => {
@@ -35,14 +37,21 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 	pushData() {
 		for(let i: number = 0 ; i < this.state.rawData.data.length ; i++) {
 			this.state.data.push({
-				id: this.state.rawData.data[i].split("$")[0],
-				Humidity: `${Number(this.state.rawData.data[i].split("$")[3]).toFixed(1)} %`,
-				Temperature: `${Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)} ºC`,
+				"Medição Nº": this.state.rawData.data[i].split("$")[0],
+				Umidade: `${Number(this.state.rawData.data[i].split("$")[3]).toFixed(1)} %`,
+				Temperatura: `${Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)} ºC`,
 				"Heat Index": `${Number(this.state.rawData.data[i].split("$")[2]).toFixed(1)} ºC`,
-				Date: `${new Date(Number(this.state.rawData.data[i].split("$")[4]))}`,
+				Data: `${this.getRightTime(Number(this.state.rawData.data[i].split("$")[4]))}`,
 			})
 		}
 		this.setState({ isPushed: true })
+	}
+
+	getRightTime(epochTime: number) {
+		//Mon Sep 26 2022 21:36:16 GMT-0300 (Brasilia Standard Time)
+		let date = new Date(epochTime * 1000).toLocaleString();
+		date = date.split(",")[0] + " às" + date.split(",")[1]
+		return date;
 	}
 
 	render() { !this.state.gotData && this.getChartData();
