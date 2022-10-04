@@ -62,6 +62,7 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 					<div className="app">
 							<div className="app-title">
 								<h3>{ this.props.resumeLanguage.title }</h3>
+								<p>{ this.props.resumeLanguage.description }</p>
 							</div>
 							<ReactTableUI
 								title='My Table'
