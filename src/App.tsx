@@ -8,7 +8,6 @@ import Logs from './components/pages/Logs';
 import 'font-awesome/css/font-awesome.min.css';
 
 const ptBR = require("./data/res_primary_language.json");
-const enUS = require("./data/res_secondary_language.json");
 const data = require("./data/shared_data.json");
 
 class App extends React.Component {
@@ -52,7 +51,7 @@ class Main extends React.Component<{resume: any}, {actualPage: string, language:
               />,
               "/about": <About/>,
               "/logs": <Logs 
-                resumeLanguage={ this.state.language.pages.home }
+                resumeLanguage={ this.state.language.pages.logs }
                 resumeMessages={ this.state.language.messages }
               />,
               "/default": <Unreachable/>
