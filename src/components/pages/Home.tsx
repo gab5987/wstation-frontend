@@ -1,10 +1,9 @@
 import { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
-import axios from "axios";
+import { apiInstance, getMessage, raiseExeption } from '../raiseExeption';
+
 import "./assets/Home.scss";
 import "./assets/Pages.scss";
-
-const apiBaseUrl = "http://147.182.208.9:8080";
 
 class Homepage extends PureComponent<{resumeLanguage: any, resumeMessages: any},
   { data: any, gotData: boolean, rawData: any, isPushed: boolean}> {
@@ -21,16 +20,17 @@ class Homepage extends PureComponent<{resumeLanguage: any, resumeMessages: any},
   }
 
   async getChartData() {
-    await axios.get(apiBaseUrl + "/measurements")
-    .then((res) => {
-      this.setState({
-        gotData: true,
-        rawData: res
-      }, () => { 
-        this.state.data[0] === undefined && this.pushData();
-      })
-    })
-  }
+		await apiInstance.instance.get(apiInstance.baseurl + "/measurements")
+		.then((res) => {
+			this.setState({
+				gotData: true,
+				rawData: res
+			}, () => { 
+				this.state.data[0] === undefined && this.pushData();
+			})
+		})
+		.catch((error) => {  })
+	}
 
   pushData() {
     for(let i: number = 10 ; i >= 0 ; i--) {
@@ -47,7 +47,7 @@ class Homepage extends PureComponent<{resumeLanguage: any, resumeMessages: any},
 
   render() { !this.state.gotData && this.getChartData();
     if(this.state.isPushed === false){
-      return <h1> { this.props.resumeMessages.loading } </h1>
+      return <h1> { getMessage() } </h1>
     } else {
       return (
         <div className="main-screen">
