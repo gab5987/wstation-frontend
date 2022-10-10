@@ -1,13 +1,9 @@
 import React from "react";
 import "./assets/Pages.scss";
 import ReactTableUI from 'react-table-ui'
-import axios from "axios";
-
-const apiBaseUrl = "http://147.182.208.9:8080";
-
-
+import { apiInstance, getMessage, raiseExeption } from '../raiseExeption';
 class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any}, 
-	{ data: any, gotData: boolean, rawData: any, isPushed: boolean, }>  {
+	{ data: any, gotData: boolean, rawData: any, isPushed: boolean, gotExeption: boolean }>  {
 
 	constructor(props: any) {
 		super(props);
@@ -15,15 +11,17 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 				data: [],
 				rawData: undefined,
 				gotData: false,
-				isPushed: false
+				isPushed: false,
+				gotExeption: false,
 			}
 			this.getChartData = this.getChartData.bind(this);
 			this.pushData = this.pushData.bind(this);
 			this.getRightTime = this.getRightTime.bind(this);
+			this.display = this.display.bind(this);
 	}
 
 	async getChartData() {
-		await axios.get(apiBaseUrl + "/measurements")
+		await apiInstance.instance.get(apiInstance.baseurl + "/measurements")
 		.then((res) => {
 			this.setState({
 				gotData: true,
@@ -32,6 +30,7 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 				this.state.data[0] === undefined && this.pushData();
 			})
 		})
+		.catch((error) => {  })
 	}
 
 	pushData() {
@@ -40,7 +39,7 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 				"Medição Nº": this.state.rawData.data[i].split("$")[0],
 				Umidade: `${Number(this.state.rawData.data[i].split("$")[3]).toFixed(1)} %`,
 				Temperatura: `${Number(this.state.rawData.data[i].split("$")[1]).toFixed(1)} ºC`,
-				"Heat Index": `${Number(this.state.rawData.data[i].split("$")[2]).toFixed(1)} ºC`,
+				"Sensação Térmica": `${Number(this.state.rawData.data[i].split("$")[2]).toFixed(1)} ºC`,
 				Data: `${this.getRightTime(Number(this.state.rawData.data[i].split("$")[4]))}`,
 			})
 		}
@@ -54,43 +53,50 @@ class Logs extends React.Component<{resumeLanguage: any, resumeMessages: any},
 		return date;
 	}
 
-	render() { !this.state.gotData && this.getChartData();
-			if(this.state.isPushed === false){
-				return <h1> { this.props.resumeMessages.loading } </h1>
-			} else {
-				return (
-					<div className="app">
-							<div className="app-title">
-								<h3>{ this.props.resumeLanguage.title }</h3>
-								<p>{ this.props.resumeLanguage.description }</p>
-							</div>
-							<ReactTableUI
-								title='My Table'
-								data={ this.state.data }
-								actionOptions={{
-								}}
-								styleOptions={{
-									titleBar: false,
-									theme: {
-										colors: {
-											background: {
-												primary: "#282c34",
-												secondary: "#343a45",
-											},
-											text: {
-												primary: "#b5b3b3",
-												secondary: "#b5b3b3",
-											},
-											border: {
-												primary: "#a3a3a3",
-											}
+	render() { 
+		!this.state.gotData && this.getChartData();
+		if(!this.state.gotExeption) {
+			return this.display();
+		}
+	}
+
+	display() {
+		if(this.state.isPushed === false){
+			return <h1> { getMessage() } </h1>
+		} else {
+			return (
+				<div className="app">
+						<div className="app-title">
+							<h3>{ this.props.resumeLanguage.title }</h3>
+							<p>{ this.props.resumeLanguage.description }</p>
+						</div>
+						<ReactTableUI
+							title='My Table'
+							data={ this.state.data }
+							actionOptions={{
+							}}
+							styleOptions={{
+								titleBar: false,
+								theme: {
+									colors: {
+										background: {
+											primary: "#282c34",
+											secondary: "#343a45",
+										},
+										text: {
+											primary: "#b5b3b3",
+											secondary: "#b5b3b3",
+										},
+										border: {
+											primary: "#a3a3a3",
 										}
-									},
-								}}
-							/>
-					</div>
-				);
-			}
+									}
+								},
+							}}
+						/>
+				</div>
+			);
+		}
 	}
 }
 export default Logs;
