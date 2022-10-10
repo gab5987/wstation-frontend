@@ -32,23 +32,23 @@ const Sidebar = (props: any) => {
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faChartSimple} />}>
-                        <a href="/about"> Graphs </a>
+                        <a href="/about"> Gráficos </a>
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faTemperatureQuarter} />}>
-                        <a href="/about"> Temperature </a>
+                        <a href="/about"> Temperatura </a>
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faDroplet} />}>
-                        <a href="/about"> Humidity </a>
+                        <a href="/about"> Umidade </a>
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faGears} />}>
-                        <a href="/about"> Settings </a>
+                        <a href="/about"> Preferências </a>
                     </MenuItem>
 
                     <MenuItem icon={<FontAwesomeIcon icon={faQuestion} />}>
-                        <a href="/about"> About </a>
+                        <a href="/about"> Sobre </a>
                     </MenuItem>
                 </Menu>
             </SidebarContent>
@@ -56,7 +56,7 @@ const Sidebar = (props: any) => {
             <SidebarFooter>
                 <Menu iconShape="circle" className='exit-button'>
                     <MenuItem icon={<FontAwesomeIcon icon={faUser} />}>
-                        <a href="/home"> Exit </a>
+                        <a href="/home"> Sair </a>
                     </MenuItem>
                 </Menu>
             </SidebarFooter>
